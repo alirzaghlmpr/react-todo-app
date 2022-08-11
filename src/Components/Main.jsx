@@ -1,9 +1,10 @@
 import React from 'react'
 import { useEffect, useReducer } from "react";
 import InputTodo from "./InputTodo"
+import InputLabel from "./InputLabel"
 import { reducer, initialState, actionTypes } from "../Reducer"
-import { postTodo } from "../Services"
-import { createTodo, appInit } from "../Utils"
+import { postTodo, postLabel } from "../Services"
+import { createTodo, appInit, createLabel } from "../Utils"
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -19,6 +20,14 @@ export default function Main() {
         })
     }
 
+    function handleLabelSubmit(data) {
+
+        postLabel(createLabel(data)).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.ENTER_LABEL, payload: { label: response } })
+        })
+
+    }
     return (
         <div className="container mt-5">
             <div className="row align-items-start justify-content-around">
@@ -29,10 +38,7 @@ export default function Main() {
                 <div className="col-md-3 col-12 my-md-0 my-5 p-md-0 p-4">
                     <h3>Labels</h3>
                     <hr />
-                    <div className="col-12">
-                        <input type="text" className="form-control"
-                            placeholder="add costume Label" />
-                    </div>
+                    <InputLabel handleSubmit={handleLabelSubmit} />
                     <div className="col-12 my-2">
                         <button type="button" className="btn btn-primary my-2 w-100">
                             uncategorized <span className="badge text-bg-secondary m-1 p-2"> <i className="bi bi-stickies"></i> 4 items</span>

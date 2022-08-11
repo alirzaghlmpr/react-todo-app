@@ -24,3 +24,10 @@ export function postTodo(data) {
     .then((response) => response.data)
     .catch((error) => error.message);
 }
+
+export function postLabel(data) {
+  return axios
+    .post("/labels", data)
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}

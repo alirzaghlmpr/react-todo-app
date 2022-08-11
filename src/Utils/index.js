@@ -28,3 +28,13 @@ export function createTodo(data) {
     isDone: false,
   };
 }
+
+export function createLabel(data) {
+  let { label, count } = data;
+
+  return {
+    label: label,
+    count: count,
+    id: createUniqueId(),
+  };
+}

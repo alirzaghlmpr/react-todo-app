@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, useEffect } from '../Hooks'
+import { useForm } from '../Hooks'
 
 export default function InputTodo({ labels, handleSubmit }) {
 
