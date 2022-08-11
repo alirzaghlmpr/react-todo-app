@@ -4,6 +4,8 @@ export const initialState = {
 };
 
 export const actionTypes = {
+  GET_TODOS: "GET_TODOS",
+  GET_LABELS: "GET_LABELS",
   ENTER_TODO: "ENTER_TODO",
   ENTER_LABEL: "ETNER_LABEL",
   EDIT_TODO: "EDIT_TODO",
@@ -13,12 +15,32 @@ export const actionTypes = {
 
 export function reducer(state, action) {
   switch (action.type) {
+    case actionTypes.GET_TODOS:
+      return {
+        ...state,
+        todosList: action.payload.response,
+      };
+
+    case actionTypes.GET_LABELS:
+      return {
+        ...state,
+        labelsList: action.payload.response,
+      };
+
     case actionTypes.ENTER_TODO:
-      return { ...state, todosList: [action.payload.todo, ...state.todosList] };
+      console.log(action.payload.todo);
+      return {
+        ...state,
+        todosList: [action.payload.todo, ...state.todosList],
+      };
+
     case actionTypes.ENTER_LABEL:
       return {
         ...state,
         labelsList: [action.payload.label, ...state.labelsList],
       };
+
+    default:
+      throw new Error("invalid action type");
   }
 }

@@ -1,20 +1,29 @@
 import React from 'react'
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import InputTodo from "./InputTodo"
 import { reducer, initialState, actionTypes } from "../Reducer"
+import { postTodo } from "../Services"
+import { createTodo, appInit } from "../Utils"
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    function handleSubmit(data) {
-        console.log(data)
+    useEffect(() => {
+        appInit(dispatch)
+    }, [])
+
+    function handleTodoSubmit(data) {
+        postTodo(createTodo(data)).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.ENTER_TODO, payload: { todo: response } })
+        })
     }
 
     return (
         <div className="container mt-5">
             <div className="row align-items-start justify-content-around">
 
-                <InputTodo labels={state.labels} handleSubmit={handleSubmit} />
+                <InputTodo handleSubmit={handleTodoSubmit} />
 
 
                 <div className="col-md-3 col-12 my-md-0 my-5 p-md-0 p-4">
@@ -67,10 +76,13 @@ export default function Main() {
 
                         <div className="row">
                             <h6>Example heading <span className="badge bg-primary m-1">Label</span>
-                                <span className="badge bg-success">done</span>
+                                <span className="badge bg-success m-1">done</span>
+                                <span className="badge text-muted">{new Date().toLocaleString()}</span>
                             </h6>
                             <h6 className="text-decoration-line-through">Example heading <span className="badge bg-primary m-1">Label</span>
                                 <span className="badge bg-warning">undone</span>
+                                <span className="badge text-muted">{new Date().toLocaleString()}</span>
+
                             </h6>
                         </div>
 
