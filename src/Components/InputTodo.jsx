@@ -1,10 +1,10 @@
 import React from 'react'
 import { useForm } from '../Hooks'
-
+import FormLabelOption from "./FormLabelOption"
 export default function InputTodo({ labels, handleSubmit }) {
 
 
-    const [fields, handleForm] = useForm({ todo: "", label: "" })
+    const [fields, handleForm] = useForm({ todo: "", label: "uncategorized" })
 
     function handleKeyDown(e) {
         if (e.key === "Enter") {
@@ -16,7 +16,7 @@ export default function InputTodo({ labels, handleSubmit }) {
 
     }
     return (
-        <div className="col-md-4 col-12 p-md-0 p-4">
+        <>
             <h3>Todos App</h3>
             <hr />
             <div className="input-group border rounded p-1">
@@ -26,15 +26,14 @@ export default function InputTodo({ labels, handleSubmit }) {
                 <div className="vr"></div>
 
                 <div className="input-group-append">
-                    <select value={fields.label} className="form-select border-0" onChange={(e) => handleForm(e)}
+                    <select value={fields.label} className="form-select border-0"
+                        onChange={(e) => handleForm(e)}
                         onKeyDown={(e) => handleKeyDown(e)}
                         name="label">
-                        <option value="uncategorized">uncategorized</option>
-                        <option value="1">Lable1</option>
-                        <option value="2">Label2</option>
-                        <option value="3">Lable3</option>
+                        <FormLabelOption list={labels} />
                     </select>
                 </div>
             </div>
-        </div>)
+        </>
+    )
 }

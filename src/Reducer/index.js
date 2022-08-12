@@ -18,17 +18,16 @@ export function reducer(state, action) {
     case actionTypes.GET_TODOS:
       return {
         ...state,
-        todosList: action.payload.response,
+        todosList: action.payload.response.reverse(),
       };
 
     case actionTypes.GET_LABELS:
       return {
         ...state,
-        labelsList: action.payload.response,
+        labelsList: action.payload.response.reverse(),
       };
 
     case actionTypes.ENTER_TODO:
-      console.log(action.payload.todo);
       return {
         ...state,
         todosList: [action.payload.todo, ...state.todosList],

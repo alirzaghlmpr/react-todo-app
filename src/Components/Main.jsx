@@ -2,16 +2,28 @@ import React from 'react'
 import { useEffect, useReducer } from "react";
 import InputTodo from "./InputTodo"
 import InputLabel from "./InputLabel"
+import TodosList from "./TodosList"
+import LabelList from "./LabelList"
 import { reducer, initialState, actionTypes } from "../Reducer"
 import { postTodo, postLabel } from "../Services"
 import { createTodo, appInit, createLabel } from "../Utils"
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState)
+    const { todosList, labelsList } = state
 
     useEffect(() => {
         appInit(dispatch)
+
     }, [])
+
+    useEffect(() => {
+        console.log("will be render todos list")
+    }, [todosList])
+
+    useEffect(() => {
+        console.log("will be render labels list")
+    }, [labelsList])
 
     function handleTodoSubmit(data) {
         postTodo(createTodo(data)).then(response => {
@@ -32,7 +44,9 @@ export default function Main() {
         <div className="container mt-5">
             <div className="row align-items-start justify-content-around">
 
-                <InputTodo handleSubmit={handleTodoSubmit} />
+                <div className="col-md-4 col-12 p-md-0 p-4">
+                    <InputTodo labels={labelsList} handleSubmit={handleTodoSubmit} />
+                </div>
 
 
                 <div className="col-md-3 col-12 my-md-0 my-5 p-md-0 p-4">
@@ -40,18 +54,7 @@ export default function Main() {
                     <hr />
                     <InputLabel handleSubmit={handleLabelSubmit} />
                     <div className="col-12 my-2">
-                        <button type="button" className="btn btn-primary my-2 w-100">
-                            uncategorized <span className="badge text-bg-secondary m-1 p-2"> <i className="bi bi-stickies"></i> 4 items</span>
-                            <span className="badge text-bg-danger p-2"> <i className="bi bi-x-square"></i> delete </span>
-                        </button>
-                        <button type="button" className="btn btn-primary my-2 w-100">
-                            uncategorized <span className="badge text-bg-secondary m-1 p-2"> <i className="bi bi-stickies"></i> 4 items</span>
-                            <span className="badge text-bg-danger p-2"> <i className="bi bi-x-square"></i> delete </span>
-                        </button>
-                        <button type="button" className="btn btn-primary my-2 w-100">
-                            uncategorized <span className="badge text-bg-secondary m-1 p-2"> <i className="bi bi-stickies"></i> 4 items</span>
-                            <span className="badge text-bg-danger p-2"> <i className="bi bi-x-square"></i> delete </span>
-                        </button>
+                        <LabelList list={labelsList} />
                     </div>
                 </div>
 
@@ -81,15 +84,7 @@ export default function Main() {
                     <div className="col-12 p-2">
 
                         <div className="row">
-                            <h6>Example heading <span className="badge bg-primary m-1">Label</span>
-                                <span className="badge bg-success m-1">done</span>
-                                <span className="badge text-muted">{new Date().toLocaleString()}</span>
-                            </h6>
-                            <h6 className="text-decoration-line-through">Example heading <span className="badge bg-primary m-1">Label</span>
-                                <span className="badge bg-warning">undone</span>
-                                <span className="badge text-muted">{new Date().toLocaleString()}</span>
-
-                            </h6>
+                            <TodosList list={todosList} />
                         </div>
 
                     </div>
