@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { initialState } from "../Reducer";
 
 export function useForm(initValue) {
   const [fields, setFields] = useState(initValue);

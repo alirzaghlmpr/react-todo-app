@@ -34,7 +34,25 @@ export function postLabel(data) {
 
 export function searchTodo(stringQuery, label) {
   return axios
-    .get(`/todos?todo_like=${stringQuery}${label === "all" ? "" : `&label=${label}`}`)
+    .get(
+      `/todos?todo_like=${stringQuery}${
+        label === "all" ? "" : `&label=${label}`
+      }`
+    )
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}
+
+export function deleteTodo(id) {
+  return axios
+    .delete(`/todos/${id}`)
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}
+
+export function deleteLabel(id) {
+  return axios
+    .delete(`/labels/${id}`)
     .then((response) => response.data)
     .catch((error) => error.message);
 }

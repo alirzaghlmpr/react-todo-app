@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Todo({ todo }) {
+export default function Todo({ todo, handleDelete }) {
     let isDone = todo.isDone
     return (
         <h6>
@@ -8,8 +8,9 @@ export default function Todo({ todo }) {
             <span className=
                 {`badge ${isDone ? "bg-success" : "bg-warning"} m-1`}>{isDone ? "done(click to change)" : "undone(click to change)"}
             </span>
-            <span className="badge text-bg-danger p-2"> <i className="bi bi-trash3">
-            </i> </span>
+            <span onClick={() => handleDelete(todo.id)}
+                className="badge text-bg-danger p-2"> <i className="bi bi-trash3">
+                </i> </span>
             <span className="badge text-muted">{todo.date}</span>
         </h6>
     )

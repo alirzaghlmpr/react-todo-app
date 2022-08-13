@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Todo from "./Todo"
 import { searchTodo } from "../Services"
-export default function TodosList({ list, query, label }) {
+export default function TodosList({ handleDelete, list, query, label }) {
 
     const [filteredList, setList] = useState(list)
 
@@ -10,7 +10,7 @@ export default function TodosList({ list, query, label }) {
     }, [list, query, label])
 
     let todos = filteredList.length > 0 ? filteredList.map((todo) => {
-        return <Todo todo={todo} key={todo.id} />
+        return <Todo todo={todo} handleDelete={handleDelete} key={todo.id} />
     }) : <p className="text-muted">ops! <br /> cannot find any thing :( </p>
 
 

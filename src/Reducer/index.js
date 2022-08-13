@@ -13,6 +13,7 @@ export const actionTypes = {
   EDIT_TODO: "TOGGLE_TODO",
   SEARCH_TODO: "SEARCH_TODO",
   DELETE_TODO: "DELETE_TODO",
+  DELETE_LABEL: "DELETE_LABEL",
 };
 
 export function reducer(state, action) {
@@ -47,6 +48,23 @@ export function reducer(state, action) {
         todoQuery: action.payload.query,
         activeLabel: action.payload.label,
       };
+
+    case actionTypes.DELETE_TODO:
+      let prevTodos = [...state.todosList];
+
+      return {
+        ...state,
+        todosList: prevTodos.filter((item) => item.id !== action.payload.id),
+      };
+
+    case actionTypes.DELETE_LABEL:
+      let prevLabels = [...state.labelsList];
+
+      return {
+        ...state,
+        labelsList: prevLabels.filter((item) => item.id !== action.payload.id),
+      };
+
     default:
       throw new Error("invalid action type");
   }

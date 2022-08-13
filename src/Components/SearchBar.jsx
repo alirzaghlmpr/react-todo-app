@@ -13,7 +13,7 @@ export default function SearchBar({ handleSearch, list }) {
 
     useEffect(() => {
         handleSearch({ todo, label })
-    }, [todo, label, handleSearch])
+    }, [todo, label])
 
     return (
         <div className="input-group border rounded p-1">

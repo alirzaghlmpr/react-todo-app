@@ -5,3 +5,11 @@
 #todos-list {
   height: 400px;
 }
+
+#labels-section:hover {
+  cursor: pointer;
+}
+
+#todos-list:hover {
+  cursor: pointer;
+}

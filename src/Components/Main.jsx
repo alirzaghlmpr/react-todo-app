@@ -6,7 +6,7 @@ import TodosList from "./TodosList"
 import LabelList from "./LabelList"
 import SearchBar from "./SearchBar"
 import { reducer, initialState, actionTypes } from "../Reducer"
-import { postTodo, postLabel } from "../Services"
+import { postTodo, postLabel, deleteTodo, deleteLabel } from "../Services"
 import { createTodo, appInit, createLabel } from "../Utils"
 
 export default function Main() {
@@ -15,7 +15,6 @@ export default function Main() {
 
     useEffect(() => {
         appInit(dispatch)
-
     }, [])
 
     function handleTodoSubmit(data) {
@@ -40,6 +39,21 @@ export default function Main() {
             payload: { query: data.todo, label: data.label }
         })
     }
+
+    function handleTodoDelete(id) {
+        deleteTodo(id).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.DELETE_TODO, payload: { id: id } })
+        })
+    }
+
+    function handleLabelDelete(id) {
+        deleteLabel(id).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.DELETE_LABEL, payload: { id: id } })
+        })
+    }
+
     return (
         <div className="container mt-5">
             <div className="row align-items-start justify-content-around">
@@ -54,7 +68,7 @@ export default function Main() {
                     <hr />
                     <InputLabel handleSubmit={handleLabelSubmit} />
                     <div className="col-12 my-2 p-2 overflow-auto" id="labels-section">
-                        <LabelList list={labelsList} />
+                        <LabelList handleDelete={handleLabelDelete} list={labelsList} />
                     </div>
                 </div>
 
@@ -70,7 +84,8 @@ export default function Main() {
                     <div className="col-12 p-2 " >
 
                         <div className="row overflow-auto" id="todos-list">
-                            <TodosList list={todosList} query={todoQuery} label={activeLabel} />
+                            <TodosList handleDelete={handleTodoDelete} list={todosList}
+                                query={todoQuery} label={activeLabel} />
                         </div>
 
                     </div>
