@@ -31,3 +31,10 @@ export function postLabel(data) {
     .then((response) => response.data)
     .catch((error) => error.message);
 }
+
+export function searchTodo(stringQuery, label) {
+  return axios
+    .get(`/todos?todo_like=${stringQuery}${label === "all" ? "" : `&label=${label}`}`)
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}

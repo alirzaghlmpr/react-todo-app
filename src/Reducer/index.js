@@ -1,6 +1,8 @@
 export const initialState = {
   todosList: [],
   labelsList: [],
+  todoQuery: null,
+  activeLabel: null,
 };
 
 export const actionTypes = {
@@ -8,7 +10,7 @@ export const actionTypes = {
   GET_LABELS: "GET_LABELS",
   ENTER_TODO: "ENTER_TODO",
   ENTER_LABEL: "ETNER_LABEL",
-  EDIT_TODO: "EDIT_TODO",
+  EDIT_TODO: "TOGGLE_TODO",
   SEARCH_TODO: "SEARCH_TODO",
   DELETE_TODO: "DELETE_TODO",
 };
@@ -39,6 +41,12 @@ export function reducer(state, action) {
         labelsList: [action.payload.label, ...state.labelsList],
       };
 
+    case actionTypes.SEARCH_TODO:
+      return {
+        ...state,
+        todoQuery: action.payload.query,
+        activeLabel: action.payload.label,
+      };
     default:
       throw new Error("invalid action type");
   }

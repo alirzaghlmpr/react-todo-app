@@ -7,7 +7,7 @@ export default function Label({ label }) {
             </p>
             <span className="badge text-bg-secondary m-1 p-2">
                 <i className="bi bi-stickies"></i> {`${label.count} items`}</span>
-            <span className="badge text-bg-danger p-2"> <i className="bi bi-x-square">
-            </i> delete </span>
+            <span className="badge text-bg-danger p-2"> <i className="bi bi-trash3">
+            </i> </span>
         </div>)
 }
