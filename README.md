@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+## Description
+react todo app with CRUD operation with json-server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
+**Client:** React js , Bootstrap
 
-## Available Scripts
+**Server:** json server
 
-In the project directory, you can run:
+## Packages
+| Package | Useage |
+| ------ | ------ |
+| [json-server](https://github.com/typicode/json-server) | use for simulate backend |
+| [axios](https://axios-http.com/) | for create HTTP request better and smoother |
+| [Bootstrap](https://www.npmjs.com/package/bootstrap) | for styling |
+| [Bootstrap-icons](https://icons.getbootstrap.com/) | for icons |
+| [uuidv4](https://www.npmjs.com/package/uuidv4) | for create unique key for list rendering |
+| [react-toastify](https://www.npmjs.com/package/react-toastify) | for create toast-notification |
+| [concurrently](https://www.npmjs.com/package/concurrently) | for run multiple scripts simultaneously with one script |
 
-### `npm start`
+## Getting Start
+```sh
+$ git clone https://github.com/alirzaghlmpr/react-todo-app.git
+$ cd react-todo-app
+$ npm i
+$ npm start
+```
+it may take a little long to run for first time , so wait till the browser showup!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> with concurrently package , the "npm start" in "create-react-app" is equal to run this following commands:
+```sh
+npm start = npm start(create-react-app default) + json-server --watch db.json
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## CRUD operation and routes
 
-### `npm test`
+see the implemented APIs in [src/Services/index.js](https://github.com/alirzaghlmpr/react-todo-app/blob/master/src/Services/index.js)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+baseurl : localhost:3001
+| Method | Route | Description
+| ------ | ------ | ------
+| GET | /todos | get all todos
+| GET | /todos?todo_like={query}&label={label} | get all datas with todo like {query} and have the {label}
+| GET | /labels | get all labels
+| POST | /todos | post a data to todos list
+| POST | /labels | post a data to labels list
+| DELETE | /todos/{id} | delete data with {id} from todos list
+| DELETE | /labels/{id} | delete data with {id} from labels list
+| PUT | /todos/{id} | update data with {id} from todos list
+| PUT | /labels/{id} | update data with {id} from labels list
