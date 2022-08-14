@@ -3,6 +3,7 @@ export const initialState = {
   labelsList: [],
   todoQuery: null,
   activeLabel: null,
+  toast: { type: null, message: null },
 };
 
 export const actionTypes = {
@@ -36,12 +37,14 @@ export function reducer(state, action) {
       return {
         ...state,
         todosList: [action.payload.todo, ...state.todosList],
+        toast: { type: "success", message: "Todo added successfully!" },
       };
 
     case actionTypes.ENTER_LABEL:
       return {
         ...state,
         labelsList: [action.payload.label, ...state.labelsList],
+        toast: { type: "success", message: "Label added successfully!" },
       };
 
     case actionTypes.SEARCH_TODO:
@@ -57,6 +60,7 @@ export function reducer(state, action) {
       return {
         ...state,
         todosList: prevTodos.filter((item) => item.id !== action.payload.id),
+        toast: { type: "error", message: "Todo deleted successfully!" },
       };
 
     case actionTypes.DELETE_LABEL:
@@ -65,6 +69,7 @@ export function reducer(state, action) {
       return {
         ...state,
         labelsList: prevLabels.filter((item) => item.id !== action.payload.id),
+        toast: { type: "error", message: "Label deleted successfully!" },
       };
 
     case actionTypes.UPDATE_TODO:
@@ -75,6 +80,7 @@ export function reducer(state, action) {
       return {
         ...state,
         todosList: todos,
+        toast: { type: "info", message: "Todo changed successfully!" },
       };
 
     case actionTypes.UPDATE_LABEL:

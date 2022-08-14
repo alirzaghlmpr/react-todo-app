@@ -5,13 +5,15 @@ import InputLabel from "./InputLabel"
 import TodosList from "./TodosList"
 import LabelList from "./LabelList"
 import SearchBar from "./SearchBar"
+import Toast from "./Toast"
+
 import { reducer, initialState, actionTypes } from "../Reducer"
 import { postTodo, postLabel, deleteTodo, deleteLabel, updateTodo, updateLabel } from "../Services"
 import { createTodo, appInit, createLabel, findLabel } from "../Utils"
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const { todosList, labelsList, todoQuery, activeLabel } = state
+    const { todosList, labelsList, todoQuery, activeLabel, toast } = state
 
     useEffect(() => {
         appInit(dispatch)
@@ -29,6 +31,8 @@ export default function Main() {
             console.log(response)
             dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
         })
+
+
     }
 
     function handleLabelSubmit(data) {
@@ -114,6 +118,7 @@ export default function Main() {
 
                 </div>
             </div>
+            <Toast type={toast.type} message={toast.message} />
         </div>
 
     )
