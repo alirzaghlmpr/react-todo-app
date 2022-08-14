@@ -37,14 +37,20 @@ export function reducer(state, action) {
       return {
         ...state,
         todosList: [action.payload.todo, ...state.todosList],
-        toast: { type: "success", message: "Todo added successfully!" },
+        toast: {
+          type: "success",
+          message: `${action.payload.todo.todo} added successfully!`,
+        },
       };
 
     case actionTypes.ENTER_LABEL:
       return {
         ...state,
         labelsList: [action.payload.label, ...state.labelsList],
-        toast: { type: "success", message: "Label added successfully!" },
+        toast: {
+          type: "success",
+          message: `${action.payload.label.label} added successfully!`,
+        },
       };
 
     case actionTypes.SEARCH_TODO:
@@ -59,8 +65,13 @@ export function reducer(state, action) {
 
       return {
         ...state,
-        todosList: prevTodos.filter((item) => item.id !== action.payload.id),
-        toast: { type: "error", message: "Todo deleted successfully!" },
+        todosList: prevTodos.filter(
+          (item) => item.id !== action.payload.data.id
+        ),
+        toast: {
+          type: "error",
+          message: `${action.payload.data.todo} deleted successfully!`,
+        },
       };
 
     case actionTypes.DELETE_LABEL:
@@ -68,8 +79,13 @@ export function reducer(state, action) {
 
       return {
         ...state,
-        labelsList: prevLabels.filter((item) => item.id !== action.payload.id),
-        toast: { type: "error", message: "Label deleted successfully!" },
+        labelsList: prevLabels.filter(
+          (item) => item.id !== action.payload.data.id
+        ),
+        toast: {
+          type: "error",
+          message: `${action.payload.data.label} deleted successfully!`,
+        },
       };
 
     case actionTypes.UPDATE_TODO:
@@ -80,7 +96,12 @@ export function reducer(state, action) {
       return {
         ...state,
         todosList: todos,
-        toast: { type: "info", message: "Todo changed successfully!" },
+        toast: {
+          type: "info",
+          message: `${action.payload.data.todo} changed successfully to ${
+            action.payload.data.isDone ? "done" : "undone"
+          }!`,
+        },
       };
 
     case actionTypes.UPDATE_LABEL:

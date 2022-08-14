@@ -15,7 +15,7 @@ export default function Toast({ type, message }) {
                 progress: undefined,
             });
         }
-    });
+    }, [type, message]);
 
     return (
         <ToastContainer

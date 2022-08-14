@@ -54,7 +54,7 @@ export default function Main() {
     function handleTodoDelete(data) {
         deleteTodo(data.id).then(response => {
             console.log(response)
-            dispatch({ type: actionTypes.DELETE_TODO, payload: { id: data.id } })
+            dispatch({ type: actionTypes.DELETE_TODO, payload: { data: data } })
         })
 
         let label = findLabel(data.label, [...labelsList])
@@ -65,10 +65,10 @@ export default function Main() {
         })
     }
 
-    function handleLabelDelete(id) {
-        deleteLabel(id).then(response => {
+    function handleLabelDelete(data) {
+        deleteLabel(data.id).then(response => {
             console.log(response)
-            dispatch({ type: actionTypes.DELETE_LABEL, payload: { id: id } })
+            dispatch({ type: actionTypes.DELETE_LABEL, payload: { data: data } })
         })
     }
 
