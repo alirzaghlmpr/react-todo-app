@@ -1,31 +1,17 @@
 {
   "todos": [
     {
-      "todo": "new item",
+      "todo": "new 1",
       "label": "uncategorized",
-      "id": "57deb942",
-      "date": "8/14/2022, 12:14:37 AM",
-      "isDone": false
+      "id": "8e265a8b",
+      "date": "8/14/2022, 6:18:46 PM",
+      "isDone": true
     },
     {
-      "todo": "new item4",
-      "label": "xcx",
-      "id": "3f8a5cfa",
-      "date": "8/14/2022, 12:15:06 AM",
-      "isDone": false
-    },
-    {
-      "todo": "new item2",
+      "todo": "asdxc",
       "label": "uncategorized",
-      "id": "dae843d9",
-      "date": "8/14/2022, 12:19:49 AM",
-      "isDone": false
-    },
-    {
-      "todo": "new ite6",
-      "label": "uncategorized",
-      "id": "0233ffeb",
-      "date": "8/14/2022, 12:19:54 AM",
+      "id": "934b11fa",
+      "date": "8/14/2022, 10:15:55 PM",
       "isDone": false
     }
   ],

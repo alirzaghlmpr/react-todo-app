@@ -56,3 +56,10 @@ export function deleteLabel(id) {
     .then((response) => response.data)
     .catch((error) => error.message);
 }
+
+export function updateTodo(data) {
+  return axios
+    .put(`/todos/${data.id}`, data)
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}

@@ -14,6 +14,7 @@ export const actionTypes = {
   SEARCH_TODO: "SEARCH_TODO",
   DELETE_TODO: "DELETE_TODO",
   DELETE_LABEL: "DELETE_LABEL",
+  UPDATE_TODO: "UPDATE_TODO",
 };
 
 export function reducer(state, action) {
@@ -63,6 +64,14 @@ export function reducer(state, action) {
       return {
         ...state,
         labelsList: prevLabels.filter((item) => item.id !== action.payload.id),
+      };
+
+    case actionTypes.UPDATE_TODO:
+      let todos = [...state.todosList];
+
+      return {
+        ...state,
+        todosList: todos.filter((item) => item.id !== action.payload.data.id),
       };
 
     default:

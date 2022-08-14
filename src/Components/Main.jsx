@@ -6,7 +6,7 @@ import TodosList from "./TodosList"
 import LabelList from "./LabelList"
 import SearchBar from "./SearchBar"
 import { reducer, initialState, actionTypes } from "../Reducer"
-import { postTodo, postLabel, deleteTodo, deleteLabel } from "../Services"
+import { postTodo, postLabel, deleteTodo, deleteLabel, updateTodo } from "../Services"
 import { createTodo, appInit, createLabel } from "../Utils"
 
 export default function Main() {
@@ -54,6 +54,14 @@ export default function Main() {
         })
     }
 
+    function handleToggle(data) {
+        data.isDone = !data.isDone
+        console.log(data);
+        updateTodo(data).then((response) => {
+
+            dispatch({ type: actionTypes.UPDATE_TODO, payload: { data: data } })
+        })
+    }
     return (
         <div className="container mt-5">
             <div className="row align-items-start justify-content-around">
@@ -84,7 +92,8 @@ export default function Main() {
                     <div className="col-12 p-2 " >
 
                         <div className="row overflow-auto" id="todos-list">
-                            <TodosList handleDelete={handleTodoDelete} list={todosList}
+                            <TodosList handleDelete={handleTodoDelete}
+                                handleToggle={handleToggle} list={todosList}
                                 query={todoQuery} label={activeLabel} />
                         </div>
 
