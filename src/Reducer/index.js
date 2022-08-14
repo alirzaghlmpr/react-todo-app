@@ -77,6 +77,15 @@ export function reducer(state, action) {
         todosList: todos,
       };
 
+    case actionTypes.UPDATE_LABEL:
+      let labels = [...state.labelsList];
+
+      labels[labels.findIndex((item) => item.id === action.payload.data.id)] =
+        action.payload.data;
+      return {
+        ...state,
+        labelsList: labels,
+      };
     default:
       throw new Error("invalid action type");
   }

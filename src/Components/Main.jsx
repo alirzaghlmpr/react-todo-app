@@ -24,9 +24,10 @@ export default function Main() {
         })
 
         let label = findLabel(data.label, [...labelsList])
+        label.count = label.count + 1
         updateLabel(label).then(response => {
             console.log(response)
-            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { label: label } })
+            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
         })
     }
 
@@ -46,10 +47,17 @@ export default function Main() {
         })
     }
 
-    function handleTodoDelete(id) {
-        deleteTodo(id).then(response => {
+    function handleTodoDelete(data) {
+        deleteTodo(data.id).then(response => {
             console.log(response)
-            dispatch({ type: actionTypes.DELETE_TODO, payload: { id: id } })
+            dispatch({ type: actionTypes.DELETE_TODO, payload: { id: data.id } })
+        })
+
+        let label = findLabel(data.label, [...labelsList])
+        label.count = label.count - 1
+        updateLabel(label).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
         })
     }
 
