@@ -6,8 +6,8 @@ import TodosList from "./TodosList"
 import LabelList from "./LabelList"
 import SearchBar from "./SearchBar"
 import { reducer, initialState, actionTypes } from "../Reducer"
-import { postTodo, postLabel, deleteTodo, deleteLabel, updateTodo } from "../Services"
-import { createTodo, appInit, createLabel } from "../Utils"
+import { postTodo, postLabel, deleteTodo, deleteLabel, updateTodo, updateLabel } from "../Services"
+import { createTodo, appInit, createLabel, findLabel } from "../Utils"
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -21,6 +21,12 @@ export default function Main() {
         postTodo(createTodo(data)).then(response => {
             console.log(response)
             dispatch({ type: actionTypes.ENTER_TODO, payload: { todo: response } })
+        })
+
+        let label = findLabel(data.label, [...labelsList])
+        updateLabel(label).then(response => {
+            console.log(response)
+            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { label: label } })
         })
     }
 
@@ -56,9 +62,8 @@ export default function Main() {
 
     function handleToggle(data) {
         data.isDone = !data.isDone
-        console.log(data);
         updateTodo(data).then((response) => {
-
+            console.log(response)
             dispatch({ type: actionTypes.UPDATE_TODO, payload: { data: data } })
         })
     }

@@ -63,3 +63,10 @@ export function updateTodo(data) {
     .then((response) => response.data)
     .catch((error) => error.message);
 }
+
+export function updateLabel(data) {
+  return axios
+    .put(`/labels/${data.id}`, data)
+    .then((response) => response.data)
+    .catch((error) => error.message);
+}

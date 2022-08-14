@@ -38,3 +38,7 @@ export function createLabel(data) {
     id: createUniqueId(),
   };
 }
+
+export function findLabel(label, list) {
+  return list.find((item) => item.label === label);
+}
