@@ -1,4 +1,18 @@
 {
-  "todos": [],
-  "labels": []
+  "todos": [
+    {
+      "todo": "test todo",
+      "label": "uncategorized",
+      "id": "618e39ca",
+      "date": "8/15/2022, 1:00:00 AM",
+      "isDone": false
+    }
+  ],
+  "labels": [
+    {
+      "label": "uncategorized",
+      "count": 1,
+      "id": "17daee68"
+    }
+  ]
 }
