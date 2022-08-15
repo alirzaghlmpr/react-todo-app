@@ -20,18 +20,19 @@ export default function Main() {
     }, [])
 
     function handleTodoSubmit(data) {
-        postTodo(createTodo(data)).then(response => {
-            console.log(response)
-            dispatch({ type: actionTypes.ENTER_TODO, payload: { todo: response } })
-        })
-
         let label = findLabel(data.label, [...labelsList])
         label.count = label.count + 1
-        updateLabel(label).then(response => {
-            console.log(response)
-            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
-        })
 
+        Promise.all([
+            postTodo(createTodo(data)).then(response => {
+                console.log(response)
+                dispatch({ type: actionTypes.ENTER_TODO, payload: { todo: response } })
+            }),
+            updateLabel(label).then(response => {
+                console.log(response)
+                dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
+            })
+        ])
 
     }
 
@@ -52,17 +53,20 @@ export default function Main() {
     }
 
     function handleTodoDelete(data) {
-        deleteTodo(data.id).then(response => {
-            console.log(response)
-            dispatch({ type: actionTypes.DELETE_TODO, payload: { data: data } })
-        })
-
         let label = findLabel(data.label, [...labelsList])
         label.count = label.count - 1
-        updateLabel(label).then(response => {
-            console.log(response)
-            dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
-        })
+
+        Promise.all([
+            deleteTodo(data.id).then(response => {
+                console.log(response)
+                dispatch({ type: actionTypes.DELETE_TODO, payload: { data: data } })
+            }),
+            updateLabel(label).then(response => {
+                console.log(response)
+                dispatch({ type: actionTypes.UPDATE_LABEL, payload: { data: label } })
+            })
+        ])
+
     }
 
     function handleLabelDelete(data) {
